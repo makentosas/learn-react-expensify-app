@@ -10,7 +10,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'indeh.html'));
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server is running, yes');
 });
 
