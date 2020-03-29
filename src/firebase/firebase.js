@@ -17,8 +17,9 @@ firebase.initializeApp(firebaseConfig);
 //firebase.analytics();
 
 const database = firebase.database();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export { firebase, database as default };
+export { firebase, googleProvider, database as default };
 
 
 
@@ -91,9 +92,9 @@ export { firebase, database as default };
 //     console.log('Error fetching data: ', e);
 // });
 
-//================
-//push to database list
-//================
+// ================
+// push to database list
+// ================
 
 // database.ref('expenses').push({
 //     description: "House",

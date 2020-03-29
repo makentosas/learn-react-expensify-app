@@ -1,66 +1,67 @@
-import { createStore } from 'redux'; //folder 10(redux)
+import { createStore } from 'redux';
+
+// Action generators - functions that return action objects
 
 const incrementCount = ({ incrementBy = 1 } = {}) => ({
-    type: 'INCREMENT',
-    incrementBy
+  type: 'INCREMENT',
+  incrementBy
 });
 
 const decrementCount = ({ decrementBy = 1 } = {}) => ({
-    type: 'DECREMENT',
-    decrementBy
+  type: 'DECREMENT',
+  decrementBy
+});
+
+const setCount = ({ count }) => ({
+  type: 'SET',
+  count
 });
 
 const resetCount = () => ({
-    type: 'RESET'   
-})
+  type: 'RESET'
+});
 
-const setCount = ({ count } = {}) => ({
-    type: 'SET',
-    count
-})
+// Reducers
+// 1. Reducers are pure functions
+// 2. Never change state or actiton
 
-const countReducer = (state = { count: 0}, action) => {
-    switch (action.type) {
-        case 'INCREMENT':
-            return {
-                count: state.count + action.incrementBy
-            };
-        case 'DECREMENT':
-            return {
-                count: state.count - action.decrementBy
-            }
-        case 'RESET':
-            return {
-                count: 0
-            }
-        case 'SET':
-            return {
-                count: action.count
-            }
-        default:
-            return state;
-    }
+const countReducer = (state = { count: 0 }, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return {
+        count: state.count + action.incrementBy
+      };
+    case 'DECREMENT':
+      return {
+        count: state.count - action.decrementBy
+      };
+    case 'SET':
+      return {
+        count: action.count
+      };
+    case 'RESET':
+      return {
+        count: 0
+      };
+    default:
+      return state;
+  }
 };
+
 const store = createStore(countReducer);
 
-//subcribe print value, same as console.log
-//unsubcribe stop calling all action after it is called.
-const unsubcribe = store.subscribe(() => {
-    console.log(store.getState());
-})
+const unsubscribe = store.subscribe(() => {
+  console.log(store.getState());
+});
 
+store.dispatch(incrementCount({ incrementBy: 5 }))
 
-store.dispatch(incrementCount({ incrementBy: 34}));
 store.dispatch(incrementCount());
-
-// unsubcribe();
-//stops all actions fro here
-
-store.dispatch(decrementCount());
-store.dispatch(decrementCount({ decrementBy: 14 }));
-
 
 store.dispatch(resetCount());
 
+store.dispatch(decrementCount());
 
-store.dispatch(setCount({ count: 436 }));
+store.dispatch(decrementCount({ decrementBy: 10 }));
+
+store.dispatch(setCount({ count: -100 }));
