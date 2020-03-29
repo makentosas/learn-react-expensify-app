@@ -21,3 +21,5 @@ const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate}) => {
 
 
 export default getVisibleExpenses;
+
+

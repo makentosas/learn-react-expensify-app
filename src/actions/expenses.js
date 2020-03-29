@@ -8,7 +8,7 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {
-    return() => {
+    return (dispatch) => {
         const {
             description = '',
             note = '',
